@@ -72,7 +72,5 @@ int main() {
     printf("A return at a rate of %.02f%% amounts to $%.02f.\n", midRoR, totalMidCalculation);
     printf("A return at a rate of %.02f%% amounts to $%.02f.\n\n", highRoR, totalHighCalculation);
 
-    printf("Invest, it's your future!!!\n\n");
-
 return 0;
 }
