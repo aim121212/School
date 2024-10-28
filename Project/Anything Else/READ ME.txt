@@ -1,0 +1,32 @@
+Linux Terminals Only!!
+
+The .c files listed in this folder can be executed by running the following commands in a terminal of your choice.
+
+gcc -o myprogram myprogram.c
+
+1) Compile .c file
+
+Run the command listed below (with the required modifications):
+
+gcc -o myprogram myprogram.c
+
+Replace "myprogram" with the name of your program.
+Replace "myprogram.c" with the .c file you wish to execute.
+
+Add '-lm' if error is received for unreferenced functions.
+
+gcc -o myprogram myprogram.c -lm
+
+2) Create an executeable file
+
+Run the command listed below (with the requried modifications):
+
+chmod +x myprogram
+
+Replace "myprogram" with the name of your program.
+
+3) Execute the program with the following command:
+
+./myprogram
+
+Replace "myprogram" with the name of your program.
