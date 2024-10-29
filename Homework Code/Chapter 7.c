@@ -219,8 +219,11 @@ int main(void) {
 
    printf("\n");
 
-   printf("Checking...\n");
-   printf("Yee, she definitely a hoe.\n\n");
+   char ready;
+
+   printf("Checking...\nResults ready.\nAre you ready [y/n]?\n");
+   scanf(" %c", &ready);
+   printf("\nYee, she definitely a hoe.\n\n");
 
 return 0;
 }
