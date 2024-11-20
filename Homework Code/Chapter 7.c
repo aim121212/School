@@ -200,6 +200,8 @@ int main(void) {
 
 */
 
+/*
+
 #include <stdio.h>
 
 int main(void) {
@@ -227,3 +229,200 @@ int main(void) {
 
 return 0;
 }
+
+*/
+/*
+
+#include <stdio.h>
+
+int main(void) {
+
+   double userWeights[5];
+   int i;
+
+   for (i = 0; i < 5; i++) {
+
+      printf("Enter weight %d:\n", (i+1));
+      scanf("%lf", &userWeights[i]);
+   }
+
+   printf("You entered: ");
+   for (i = 0; i < 5; i++) {
+
+      printf("%.02lf ", userWeights[i]);
+   }
+
+   printf("\n");
+   /*double totalWeight = 0;
+
+   for (i = 0; i < 5; i++) {
+
+      totalWeight += userWeights[i];
+   }
+
+   double maxWeight = userWeights[0];
+
+   for (i = 1; i < 5; i++) {
+
+      if (userWeights[i] > maxWeight) {
+         maxWeight = userWeights[i];
+      }
+   }
+
+   printf("Total weight: %.02lf\n", totalWeight);
+   printf("Average weight: %.02lf\n", (totalWeight/5));
+   printf("Max weight: %.02lf\n", maxWeight);
+   
+   return 0;
+}
+*/
+
+#include <stdio.h>
+
+int main(void) {
+
+   const int arrayMax = 5;
+
+   int player[arrayMax];
+   int jersey[arrayMax];
+   int rating[arrayMax];
+   int i;
+
+   int jerseyCheck;
+   int ratingCheck;
+   int replacementJersey;
+
+   for (i = 0; i < arrayMax; i++) {
+
+      player[i] = (i + 1);
+   }
+
+   /* Enter player 1's jersey number:
+      84
+      Enter player 1's rating:
+      7 
+   */
+   for (i = 0; i < arrayMax; i++) {
+
+      printf("Enter player %d's jersey number:\n", player[i]);
+      scanf("%d", &jersey[i]);
+      printf("Enter player %d's rating:\n", player[i]);
+      scanf("%d", &rating[i]);
+      printf("\n");
+   }
+
+   printf("ROSTER\n");
+
+   for (i = 0; i < arrayMax; i++) {
+
+      printf("Player %d -- Jersey number: %d, Rating: %d\n", player[i], jersey[i], rating[i]);
+   }
+
+   char option = 'z';
+
+   while (option != 'q') {
+
+      printf("\nMENU\n");
+      printf("u - Update player rating\na - Output players above a rating\nr - Replace player\no - Output roster\nq - Quit\n\n");
+      printf("Choose an option:\n");
+      scanf(" %c", &option);
+
+
+             
+         switch (option) {
+      
+         // Update player rating
+         /* Implement the "Update player rating" menu option. Prompt the user for a player's jersey number.
+         Prompt again for a new rating for the player, and then change that player's rating.
+         */
+         case 'u':
+
+            printf("Enter a jersey number:\n");
+            scanf(" %d", &jerseyCheck);
+
+            for (i = 0; i < arrayMax; i++) {
+            
+               if (jerseyCheck == jersey[i]) {
+
+                  printf("Enter a new rating for player:\n");
+                  scanf("%d", &rating[i]);
+               }
+            }
+         break;
+
+         // Output players above a rating
+         /* Implement the "Output players above a rating" menu option. Prompt the user for a rating.
+         Print the jersey number and rating for all players with ratings above the entered value.
+         */
+         case 'a':
+
+            printf("Enter a rating:\n");
+            scanf("%d", &ratingCheck);
+
+            printf("\nABOVE %d\n", ratingCheck);
+
+            for (i = 0; i < arrayMax; i++) {
+            
+               if (rating[i] > ratingCheck) {
+
+                  printf("Player %d -- Jersey number: %d, Rating: %d\n", player[i], jersey[i], rating[i]);
+               }
+            }
+         break;
+      
+         // Replace player
+         /* Implement the "Replace player" menu option. Prompt the user for the jersey number of the player to replace.
+         If the player is in the roster, then prompt again for a new jersey number and rating. Update the replaced player's jersey number and rating. 
+         */
+         case 'r':
+
+            printf("Enter a jersey number:\n");
+            scanf("%d", &replacementJersey);
+
+            for (i = 0; i < arrayMax; i++) {
+         
+               if (replacementJersey == jersey[i]) {
+
+                  printf("Enter a new jersey number:\n");
+                  scanf("%d", &jersey[i]);
+                  printf("Enter a rating for the new player:\n");
+                  scanf("%d", &rating[i]);
+                  printf("\n");
+               }
+            }
+         break;
+      
+         // Output roster
+         case 'o':
+
+            printf("ROSTER\n");
+         
+            for (i = 0; i < arrayMax; i++) {
+
+               printf("Player %d -- Jersey number: %d, Rating: %d\n", player[i], jersey[i], rating[i]);
+            }
+         break;
+      
+         // Quit
+         case 'q':
+            option = 'q';
+            break;
+   
+         default:
+            break;
+      }
+   }
+
+   //Numbers to use 84 7 23 4 4 5 30 2 66 9
+   return 0;
+}
+
+/* 84 7
+   23 4
+   4 5
+   30 2
+   66 9
+   r 12
+   o
+   q
+*/
