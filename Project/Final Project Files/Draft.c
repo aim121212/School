@@ -3,20 +3,26 @@
 
         //Function prototypes
 
+        // Alicia's task
         int askForPackages (); //Defined, prompts user to show package options
+        void venuePackages(char typeOfEvent, int numOfPeople); // add calls for functions below
+        int foodOption(); //Needs to be defined, will give user 3 food package options or will allow for catering from an outside entity at a competitive fee
+            //double foodPrice(int foodOption, int numOfPeople);
+        int entertainmentOption(); //Needs to be defined
+            // double entertainmentPrice (int entertainmentOption);
+
+        //Kevin's task
+        double BasePrice(char typeOfEvent); //Defined, depending on the event the price will change *removed from main function, changed to double to show decimals*
         int capacityFunction ();  // Defined, as the function to validate number of people
 
-        int foodOption(); //Needs to be defined, will give user 3 food package options or will allow for catering from an outside entity at a competitive fee
-        int entertainmentOption(); //Needs to be defined
-
-
-        double BasePrice(char typeOfEvent); //Defined, depending on the event the price will change *removed from main function, changed to double to show decimals*
-        double foodPrice(int foodOption, int numOfPeople);
-        double entertainmentPrice (int entertainmentOption);
+        //Daniels
         double totalPrice(double basePrice, double foodPrice, double entertainmentPrice); //Need to define as the sum of base price, expected atendee rate, food otion selection, and additional rates
-
-        void venuePackages(char typeOfEvent, int numOfPeople);
-
+        // make the day function: 
+            /* quinces and weddings are only allowed on fridays and saturdays.
+                The rest of the events are allowed on friday saturday and sundays.
+                the days can be determined by numbers: 1 for friday, 2 saturday etc (or whatever works)
+                
+                
 
         //Functions
 
