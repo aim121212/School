@@ -66,7 +66,7 @@ int foodOption() {
     
     printf("1 - Venue Caterer 1: Italian Food\n");
     printf("2 - Venue Caterer 2: Mexican Food\n");
-    printf("3 - Client-provided catering\n");
+    printf("3 - Client-provided catering\n\n");
     printf("Enter your choice: ");
     scanf("%d", &foodOption);
 
@@ -74,12 +74,13 @@ int foodOption() {
         printf("Invalid choice. Enter 1, 2, or 3: ");
         scanf("%d", &foodOption);
     }
-    printf("You chose option %d.\n", foodOption);
+    printf("You chose option %d.\n\n", foodOption);
     return foodOption;
 }
 
 int foodPrice(int foodOption, int numPeople) {
-    int menuChoice, pricePerPlate = 0;
+    int menuChoice; 
+    int pricePerPlate = 0;
     if (foodOption == 1) {
         printf("Caterer 1 Menu:\n");
         printf("1 - Spaghetti and Meatballs ($20/plate)\n");
@@ -88,16 +89,18 @@ int foodPrice(int foodOption, int numPeople) {
         printf("Enter your choice: ");
         scanf("%d", &menuChoice);
 
+        while (menuChoice < 1 || menuChoice > 3){
+            printf("Invalid choice. Enter 1, 2, or 3: ");
+        scanf("%d", &menuChoice);
+        }
         if (menuChoice >= 1 && menuChoice <= 2){
             pricePerPlate = 20;
         }
         else if (menuChoice == 3){
              pricePerPlate = 30;
         }
-        else {
-            return -1; // Invalid choice
-        }
-    } else if (foodOption == 2) {
+    }
+     else if (foodOption == 2) {
         printf("Caterer 2 Menu:\n");
         printf("1 - Flautas ($20/plate)\n");
         printf("2 - Tacos ($20/plate)\n");
@@ -105,39 +108,77 @@ int foodPrice(int foodOption, int numPeople) {
         printf("Enter your choice: ");
         scanf("%d", &menuChoice);
 
+        while (menuChoice < 1 || menuChoice > 3){
+            printf("Invalid choice. Enter 1, 2, or 3: ");
+        scanf("%d", &menuChoice);
+        }
         if (menuChoice >= 1 && menuChoice <= 2){
         pricePerPlate = 20;
         }
         else if (menuChoice == 3){
              pricePerPlate = 30;
         }
-        else {
-            return -1; // Invalid choice
-        }
     }
+    int price = numPeople * pricePerPlate;
+    printf("Your food price is: %d\n", price);
     return numPeople * pricePerPlate;
 }
 
 int entertainmentOption() {
     int entertainmentOption;
-    printf("\nEntertainment Options:\n");
-    printf("1 - DJ 1\n");
-    printf("2 - DJ 2\n");
-    printf("3 - Client-provided entertainment\n");
+    printf("\nWe offer entertainment options from Music to Performances.\nPlease select an option below:\n");
+    printf("\nEntertainment Options:\n\n");
+    printf("Music:\n");
+    printf("1 - DJ of all genres: $500\n");
+    printf("2 - Mariachi (mexican music group): $800\n");
+    printf("3 - Classical Orchestra: $900\n\n");
+    
+    printf("Extras:\n");
+    printf("4 - Kids Room (playtime room): $400\n");
+    printf("5 - Jumping Balloon: $300\n");
+    printf("6 - Candy Bar (sweets and deserts): $200\n");
+
+
+    printf("\n7 - Client-provided entertainment\n\n");
     printf("Enter your choice: ");
     scanf("%d", &entertainmentOption);
 
-    while (entertainmentOption < 1 || entertainmentOption > 3) {
-        printf("Invalid choice. Enter 1, 2, or 3: ");
+    while (entertainmentOption < 1 || entertainmentOption > 7) {
+        printf("Invalid choice. Enter 1, 2, 3, 4, 5, 6, or 7: ");
         scanf("%d", &entertainmentOption);
     }
     printf("You chose option %d.\n", entertainmentOption);
+    
     return entertainmentOption;
 }
 
 double entertainmentPrice(int entertainmentOption) {
-    return (entertainmentOption == 1 || entertainmentOption == 2) ? 500.0 : 0.0;
+    switch (entertainmentOption){
+        case 1:
+        return 500.00;
+        break;
+        case 2: 
+        return 800.00;
+        break;
+        case 3:
+        return 900.00;
+        break;
+        case 4:
+        return 400.00;
+        break;
+        case 5:
+        return 100.00;
+        break;
+        case 6:
+        return 400.00;
+        break;
+        case 7:
+        return 0;
+        break;
+    }
 }
+
+
 
 double BasePrice(char typeOfEvent) {
     switch (typeOfEvent) {
@@ -200,3 +241,5 @@ int main() {
 
     return 0;
 }
+
+
