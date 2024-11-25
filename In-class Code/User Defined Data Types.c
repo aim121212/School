@@ -27,9 +27,12 @@
         s1.score = 95.5; //Assigns 'score' for s1
         
         printf("Student ID: %d.\nStudent Name: %s.\nStudent score: %.02f\n\n", s1.ID, s1.Name, s1.score); //Prints assignments to verify.
-    }
-    */
+}
+*/
 
+
+//The code below uses loops to create, and store data in user created type
+/*
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -70,4 +73,6 @@
         printf("\n");
 
 
-    }
+}
+*/
+
