@@ -48,17 +48,18 @@ int askForPackages() {
 int capacityFunction(char typeOfEvent) {
     int numOfPeople = 0;
     printf("\nHow many guests do you expect to have at your event? (Max capacity: 500)\n");
-    scanf("%d", &numOfPeople);
+    scanf("%d", &numOfPeople); // user prompt to input # of guests
     getchar();
 
+    // while loop checks numOfPeople is valid under capacity limit
     while (numOfPeople > 500 || numOfPeople < 1) {
-        
+        //if invalid user needs another input
         printf("Invalid entry. Enter a number between 1 and 500: ");
         scanf("%d", &numOfPeople);
         getchar();
     }
     printf("You are expecting %d guests.\n", numOfPeople);
-    return numOfPeople;
+    return numOfPeople; // valid number will proceed with a message validating #
 }
 
 float dayFunction(char typeOfEvent, int *dayOfEvent, char *dayString) {
