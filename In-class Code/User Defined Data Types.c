@@ -76,3 +76,69 @@
 }
 */
 
+//Searching through arrays
+//Sequencial search
+//Interval search
+
+//Time is based on how many operations the program will execute (like engine hours)
+
+//Sequential search looks for data one by one
+//Interval search uses 'calculus' type method of cutting in half to find data. Data must be in order, otherwise interval serach will not function.
+
+//Interval search function is refered to as 'binary search'
+
+//Sorting data requires greater effort than searching for the data. Sorting is focus.
+
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#include <time.h>
+
+void main() {
+
+    srand (time(NULL));
+
+    int a[6];
+    int find;
+    int set;
+
+    for (int i = 0; i < 6; i++) {
+
+        a[i] = rand() % 100;
+    }
+
+    find = rand() % 50;
+    set = 0;
+
+    printf("Number to be found: %d.\n", find);
+    printf("\n");
+
+    printf("Array:\n");
+    for (int i = 0; i < 6; i++) {
+
+        printf("%d", a[i]);
+
+        if (i < 5) {
+
+            printf(", ");
+        }
+    }
+
+    printf("\n\n");
+
+    for (int i = 0; i < 6; i++) {
+
+        if (a[i] == find) {
+
+            printf("Number found at index %d.\n\n", i);
+            set = 1;
+            break;
+        }
+
+    }
+
+    if (set == 0) {
+
+        printf("Number not found.\n\n");
+    }
+}

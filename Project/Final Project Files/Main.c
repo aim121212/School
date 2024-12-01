@@ -48,18 +48,17 @@ int askForPackages() {
 int capacityFunction(char typeOfEvent) {
     int numOfPeople = 0;
     printf("\nHow many guests do you expect to have at your event? (Max capacity: 500)\n");
-    scanf("%d", &numOfPeople); // user prompt to input # of guests
+    scanf("%d", &numOfPeople);
     getchar();
 
-    // while loop checks numOfPeople is valid under capacity limit
     while (numOfPeople > 500 || numOfPeople < 1) {
-        //if invalid user needs another input
+        
         printf("Invalid entry. Enter a number between 1 and 500: ");
         scanf("%d", &numOfPeople);
         getchar();
     }
     printf("You are expecting %d guests.\n", numOfPeople);
-    return numOfPeople; // valid number will proceed with a message validating #
+    return numOfPeople;
 }
 
 float dayFunction(char typeOfEvent, int *dayOfEvent, char *dayString) {
@@ -90,7 +89,12 @@ float dayFunction(char typeOfEvent, int *dayOfEvent, char *dayString) {
     }
 
     printf("\nWhat day would you like to host your %s?\n\n", eventString);
-
+    
+    /*Based on the type of event, the switch asks the user for what day of the week they would like to hold their event.
+    It also asks if they will use the venue for more than four hours. dayString
+    
+    */
+    
     switch (typeOfEvent) {
         
         case 'w':
@@ -140,6 +144,7 @@ float dayFunction(char typeOfEvent, int *dayOfEvent, char *dayString) {
 
     printf("\nYour %s is to be held on a ", eventString);
 
+    //String is derrived from day of event.
     switch (*dayOfEvent) {
 
         case 1:
@@ -186,38 +191,37 @@ double BasePrice(char typeOfEvent, int numOfPeople) {
 
     char eventString[25];
 
-    int i = 0;
+    //If/else logic
 
-    while (i == 0) {
+    //If the clients intend to hold a small amount of guests, the rate for use of the venue is calculated accordingly.
+    if (numOfPeople <= 100) {
 
-        if (numOfPeople <= 100) {
-
-            if (numOfPeople < 50) {
-                
-                rate = numOfPeople * .002;
-            }
-
-            else {
-
-                rate = numOfPeople * .0007;
-            }
-
-        }
-
-        else if ((numOfPeople > 100) && (numOfPeople < 300)) {
+        if (numOfPeople < 50) {
             
-            rate = numOfPeople *.0009;
+            rate = numOfPeople * .002;
         }
 
         else {
 
-            rate = numOfPeople * 0.0015;
+            rate = numOfPeople * .0007;
         }
-        
 
-        i++;
     }
 
+    //If the client intends to hold an average amount of guests the following rate is calculated
+    else if ((numOfPeople > 100) && (numOfPeople < 300)) {
+        
+        rate = numOfPeople *.0009;
+    }
+
+    //Otherwise a large amount of guests are expected, the following rate is calculated
+    else {
+
+        rate = numOfPeople * 0.0015;
+    }
+    
+
+    //Each event has a fixed base price regardless of how many people are in attendance.
     switch (typeOfEvent) {
         case 'W':
         case 'w': 
@@ -240,6 +244,7 @@ double BasePrice(char typeOfEvent, int numOfPeople) {
             break;
     }
 
+    //Based on the event chosen, a  base cost and a rate based on the number of people is is added and a base cost is established..
     finalBase = baseCost + (baseCost * rate);
 
     printf("\nThe initial cost for your %s is $%.2lf; for %d guests, you can expect a base cost of $%.02lf.\n\n", eventString, baseCost, numOfPeople, finalBase);
@@ -251,11 +256,14 @@ int foodOption() {
     
     int foodOption;
     
+    //Prompts to user
     printf("\nYou have the option to secure catering from our venue's trusted partners or you may select to provide your own.\n");
     printf("Our venue typically works with two prominent catering services in the area, both are of equal quality, but have different menus.\n");
     printf("Please review their menus, or select your own service and let us know your decision by making a selection in the following prompts.\n\n");
     printf("Please make a selection from the list below:\n");
     
+
+    //First selection options. This will 
     printf("1 - Italian Based Cater\n");
     printf("2 - Mexican Based Cater\n");
     printf("3 - Client-Sourced Cater\n\n");
@@ -590,7 +598,7 @@ return (price * dayFunction);
 
 double totalPrice(double basePrice, double foodCost, double entertainmentCost) {
     return basePrice + foodCost + entertainmentCost;
-}
+} //Simple calculation comprimising of previous price/cost functions.
 
 //Main Function
 void main() {
@@ -624,7 +632,7 @@ void main() {
     printf("You will be asked to provide various information.\nOnce finalized, a detailed summary ");
     printf("of your event and corresponding quote will be generated for your review.\n\n");
 
-    //User is asked for event type.    
+    //User is asked for event type and selection is stored in typeOfEvent variable. 
     printf("Please choose an option for the type of event you are hosting from the list below:\n\n");
     printf("W - Wedding\nQ - Quinceañera\nB - Baby Shower\nS - Special Event\n ");
     printf("\n");
@@ -632,8 +640,8 @@ void main() {
     scanf("%c", &typeOfEvent);
     getchar();
 
-    //Event string for prompts
-    switch (typeOfEvent) {
+    //Event string for prompts; primarily for interaction with user.
+    switch (typeOfEvent) { 
         
         case 'w':
         case 'W':
@@ -651,8 +659,7 @@ void main() {
             strcpy(eventString, "special event");
             break;
     }
-
-    printf("Event type selected: %s.\n", eventString);
+    printf("Event type selected is %s.\n", eventString);
 
 
 
@@ -663,7 +670,11 @@ void main() {
     //Main function stores return of BasePrice function in baseCost.
     baseCost = BasePrice(typeOfEvent, numOfPeople);
 
-    //Update to initial responses
+    /*These first two assignments call the respective functions for use in the following functions. Prompts to user to update/change any of these initial responses 
+    immidiately follows this comment section.
+    */
+
+            //Update to amount of event type and guests is prompted and executed if required.
             printf("Would you like to make any changes to your selections [Y/n]? ");
             
             char responseA;
@@ -721,48 +732,51 @@ void main() {
                 baseCost = BasePrice(typeOfEvent, numOfPeople);
             }
 
-    char responseB;
 
-    //Day function is prompted to user
-    do {
-    
-        dayFactor = dayFunction(typeOfEvent, &dayOfEvent, dayString);
-        printf("\nIs this correct? [Y/n]\n\nIf not, or if you would like\nto ammend your response type 'n'.\nResponse: ");
-        scanf("%c", &responseB);
-        getchar();
-    } while (responseB != 'y' && responseB != 'Y');
+            //This next section of code assigns the day factor float variable with the result from day function.
+            char responseB; //Will loop if user enters anything other than 'y' or 'Y', indicating that their responses are incorrect.
+
+            //Day function is prompted to user
+            do {
+            
+                dayFactor = dayFunction(typeOfEvent, &dayOfEvent, &dayString);
+                printf("\nIs this correct? [Y/n]\n\nIf not, or if you would like\nto ammend your response type 'n'.\nResponse: ");
+                scanf("%c", &responseB);
+                getchar();
+            } while (responseB != 'y' && responseB != 'Y');
+
+
 
     //Package logic
-    char packageUpdate = 'y';
+    char packageUpdate = 'y'; //Initialization to enter while loop in the following section of code.
     
     if (askForPackages()) {
 
+            //While loop always executes and only exits when the user selects 'n' indicating they would not like to make upates.
             while (packageUpdate != 'n' && packageUpdate != 'n') {
         
             printf("\nThank you...\n");
 
             foodOptionChoice = foodOption(); //Calling foodOption function to select food options
-            foodCost = foodPrice(foodOptionChoice, numOfPeople);
-            entertainmentOptionChoice = entertainmentOption();
-            entertainmentCost = entertainmentPrice(entertainmentOptionChoice, numOfPeople, dayFactor);
+            foodCost = foodPrice(foodOptionChoice, numOfPeople); //Food cost is calculated by calling foodPrice function.
+            entertainmentOptionChoice = entertainmentOption(); //Calls entertainmentOption to select entertainment options.
+            entertainmentCost = entertainmentPrice(entertainmentOptionChoice, numOfPeople, dayFactor); //Entertainment cost is calculated by calling entertainmentPrice function.
 
+            //User is asked if they would like to make any changes to their previous selections. Only when user enters 'n' or 'N' will the loop exit.
             printf("Would you like to make any changes to your packages? [Y/n] ");
             scanf("%c", &packageUpdate);
             getchar();
         } 
     }
-        
-        else {
-            foodCost = entertainmentCost = 0.0;
-        }
 
+    //No cost associated for entertainment or food. Posibly for mafia types...    
+    else {
+        foodCost = entertainmentCost = 0.0;
+    }
 
-    
-    //Final Prompts
+    //A total cost is calculated usining the totalPrice function.
     totalCost = totalPrice(baseCost, foodCost, entertainmentCost);
-
-
-
+    //Final Prompts
     printf("\nFINAL EVENT SUMMARY:\n\n");
 
     printf("You are planning on hosting a %s.\n", eventString);
