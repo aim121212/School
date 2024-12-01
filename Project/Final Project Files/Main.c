@@ -18,6 +18,8 @@ double totalPrice(double basePrice, double foodCost, double entertainmentCost, f
 
 // Supporting Functions
 int askForPackages() {
+     //Prompts the user if they would like to explore available food and entertainment options for their event.
+    // returns 1 for "yes" and 0 for "no". 
 
     char option[10];
 
@@ -26,7 +28,8 @@ int askForPackages() {
     printf("Please type 'yes' or 'no': ");
         
         // suggest removing this: 'while(getchar() != '\n');'
-        
+    
+        // while loop to handle invalid outputs (not "yes" or "no").
         while(1){    
         fgets(option, sizeof(option), stdin);
         option[strcspn(option, "\n")] = '\0';
@@ -46,11 +49,15 @@ int askForPackages() {
 }
 
 int capacityFunction(char typeOfEvent) {
+    //Handles expected numbers of guests.
+    //Ensures that the number of guests attending is valid (1-500).
+    // returns the number of guests.
     int numOfPeople = 0;
     printf("\nHow many guests do you expect to have at your event? (Max capacity: 500)\n");
     scanf("%d", &numOfPeople);
     getchar();
 
+    //While loop to handle invalid number of guests. 
     while (numOfPeople > 500 || numOfPeople < 1) {
         
         printf("Invalid entry. Enter a number between 1 and 500: ");
@@ -62,7 +69,9 @@ int capacityFunction(char typeOfEvent) {
 }
 
 float dayFunction(char typeOfEvent, int *dayOfEvent, char *dayString) {
-
+//Handles day selection based on type of event.
+//Adds an overtime charge exceeding 4 hours.
+//Returns a multiplier ( timeofEvent = 4, or 6 for overtime).
     char eventString[25];
     char overtimeResponse;
 
@@ -184,7 +193,10 @@ return timeOfEvent;
 }
 
 double BasePrice(char typeOfEvent, int numOfPeople) {
-
+// Calculates the base price based on the type of event and guest count.
+// Returns Final base cost for the event.
+// Displays initial and final cost of the event.
+    
     double baseCost;
     double finalBase;
     double rate;
@@ -253,7 +265,8 @@ return finalBase;
 }
 
 int foodOption() {
-    
+// Function that asks the user to choose a catering option.
+// Returns selected catering option.
     int foodOption;
     
     //Prompts to user
@@ -262,8 +275,6 @@ int foodOption() {
     printf("Please review their menus, or select your own service and let us know your decision by making a selection in the following prompts.\n\n");
     printf("Please make a selection from the list below:\n");
     
-
-    //First selection options. This will 
     printf("1 - Italian Based Cater\n");
     printf("2 - Mexican Based Cater\n");
     printf("3 - Client-Sourced Cater\n\n");
@@ -271,6 +282,7 @@ int foodOption() {
     scanf("%d", &foodOption);
     getchar();
 
+    //While loop to ensure valid food option input from the user.
     while (foodOption < 1 || foodOption > 3) {
         
         printf("Invalid choice. Enter 1, 2, or 3: ");
@@ -283,11 +295,14 @@ int foodOption() {
 }
 
 double foodPrice(int foodOption, int numPeople) {
-
+// Calculates food price based on food option, menu choice, and number of people attending. 
+// Returns total cost and details of chosen menu.
+    
     int menuChoice; 
     double price;
     double pricePerPlate;
 
+ //If/else if ladder to deterine menu based on caterer.
     if (foodOption == 1) {
         
         printf("Italian Caterer Menu Options:\n");
@@ -409,7 +424,10 @@ return price;
 }
 
 int entertainmentOption() {
-
+// Handles entertainment options.
+// Prompts user to choose base option which is then followed with a selection of an extra option.
+//Returns sum price for base and extra option.
+    
     int entertainmentOption;
     int baseOption;
     int extraOption;
@@ -477,7 +495,7 @@ return entertainmentOption;
 }
 
 double entertainmentPrice(int entertainmentOption, int numPeople, float dayFunction) {
-
+//Function for entertainment package
     double price;
     double rate = numPeople * .1;
 
@@ -492,7 +510,9 @@ double entertainmentPrice(int entertainmentOption, int numPeople, float dayFunct
     double candyBarPrice = 600;
 
     printf("\nYou have selected the following entertainment option(s):\n");
-
+    
+// Switch statements for Base + extra option.
+// Ten's place is reserved for number of base option and one's place is reserved for extra option.
     switch (entertainmentOption) {
 
         case 60:
@@ -597,6 +617,7 @@ return (price * dayFunction);
 }
 
 double totalPrice(double basePrice, double foodCost, double entertainmentCost, float dayFunction) {
+ //Sum of base price, food cost, and entertainment cost.
     return basePrice + foodCost + entertainmentCost + dayFunction;
 } //Simple calculation comprimising of previous price/cost functions.
 
