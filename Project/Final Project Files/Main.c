@@ -14,7 +14,7 @@ double foodPrice(int foodOption, int numPeople);
 int entertainmentOption();
 double entertainmentPrice(int entertainmentOption, int numPeople, float dayFunction);
 
-double totalPrice(double basePrice, double foodCost, double entertainmentCost);
+double totalPrice(double basePrice, double foodCost, double entertainmentCost, float dayFunction);
 
 // Supporting Functions
 int askForPackages() {
@@ -596,8 +596,8 @@ double entertainmentPrice(int entertainmentOption, int numPeople, float dayFunct
 return (price * dayFunction);
 }
 
-double totalPrice(double basePrice, double foodCost, double entertainmentCost) {
-    return basePrice + foodCost + entertainmentCost;
+double totalPrice(double basePrice, double foodCost, double entertainmentCost, float dayFunction) {
+    return basePrice + foodCost + entertainmentCost + dayFunction;
 } //Simple calculation comprimising of previous price/cost functions.
 
 //Main Function
@@ -775,7 +775,7 @@ void main() {
     }
 
     //A total cost is calculated usining the totalPrice function.
-    totalCost = totalPrice(baseCost, foodCost, entertainmentCost);
+    totalCost = totalPrice(baseCost, foodCost, entertainmentCost, dayFactor);
     //Final Prompts
     printf("\nFINAL EVENT SUMMARY:\n\n");
 
